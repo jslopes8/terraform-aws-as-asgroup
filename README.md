@@ -9,7 +9,7 @@ The code will provide the following resources
 ### Usage
 ```hcl
 module "lb_bastion_group" {
-    source  = "/home/jslopes/Documents/CloudTeam/Modules_Terraform/AWS/Services/Compute/AS/terraform-aws-as-asgroup/"
+    source  = "git@github.com:jslopes8/terraform-aws-as-asgroup.git?ref=v2.0"
 
     asg_name             = "web-compute-asg"
 
