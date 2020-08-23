@@ -2,7 +2,9 @@
 Provider a launch configuration for autoscaling group.
 
 The code will provide the following resources
-* [Launch Configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration)
+* [AutoScaling Group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group)
+* [AutoScaling Policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_policy)
+* [AutoScaling Schedule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_schedule)
 
 ### Usage
 ```hcl
