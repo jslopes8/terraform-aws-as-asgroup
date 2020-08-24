@@ -34,7 +34,7 @@ variable "default_tags" {
     default = []
 }
 variable "target_group_arns" {
-    type = string
+    type = any
     default = null
 }
 variable "asg_policy" {
