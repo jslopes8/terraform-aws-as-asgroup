@@ -33,7 +33,7 @@ resource "aws_autoscaling_group" "asg_with_tg" {
     min_size                = var.min_size
     max_size                = var.max_size
     health_check_type       = var.health_check_type
-    target_group_arns       = [ var.target_group_arns ]
+    target_group_arns       = var.target_group_arns
 
     tags    = concat([
          {
