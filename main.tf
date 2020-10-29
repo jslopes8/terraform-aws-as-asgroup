@@ -2,13 +2,15 @@
 resource "aws_autoscaling_group" "asg_with_lb" {
     count = var.create && var.target_group_arns == null ? 1 : 0
 
-    name                    = var.asg_name
-    vpc_zone_identifier     = var.vpc_zone_identifier
-    launch_configuration    = var.launch_configuration
-    min_size                = var.min_size
-    max_size                = var.max_size
-    load_balancers          = var.load_balancers
-    health_check_type       = var.health_check_type
+    name                        = var.asg_name
+    vpc_zone_identifier         = var.vpc_zone_identifier
+    launch_configuration        = var.launch_configuration
+    min_size                    = var.min_size
+    max_size                    = var.max_size
+    load_balancers              = var.load_balancers
+    health_check_type           = var.health_check_type
+    health_check_grace_period   = var.health_check_grace_period
+    default_cooldown            = var.default_cooldown
 
     tags    = concat([
          {

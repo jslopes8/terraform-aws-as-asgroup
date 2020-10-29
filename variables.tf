@@ -29,6 +29,14 @@ variable "health_check_type" {
     type    = string
     default = null
 }
+variable "default_cooldown" {
+    type    = number
+    default = "300"
+}
+variable "health_check_grace_period" {
+    type    = number
+    default = "300"
+}
 variable "default_tags" {
     type    = list(map(string))
     default = []
