@@ -145,7 +145,7 @@ resource "aws_cloudwatch_metric_alarm" "asg_with_tg_up" {
     statistic           = lookup(var.auto_scaling_policy_up[count.index], "statistic", null)
     threshold           = lookup(var.auto_scaling_policy_up[count.index], "threshold", null)
     dimensions = {
-        "AutoScalingGroupName" = aws_autoscaling_group.asg_with_lb.0.name
+        "AutoScalingGroupName" = aws_autoscaling_group.asg_with_tg.0.name
     }
     actions_enabled     = lookup(var.auto_scaling_policy_up[count.index], "actions_enabled", null)
     alarm_actions       = [ aws_autoscaling_policy.asg_with_tg_up.0.arn ]
