@@ -22,35 +22,23 @@ module "lb_bastion_group" {
     load_balancers       = [ "lb-web-compute" ]
     launch_configuration = module.lb_bastion_config.name
 
-    asg_policy = [
-        {
-            name                = "cpualarm_policy"
-            caling_adjustment   = "1"
-            adjustment_type     = "ChangeInCapacity"
-            cooldown            = "300"
-            policy_type         = "SimpleScaling"
-            
-        }
-    ]
-
-    metric_alarm = [
-        {
-            alarm_name          = "${local.stack_name}-metric-alarm-up"
-            comparison_operator = "GreaterThanOrEqualToThreshold" 
-            evaluation_periods  = "2"
-            metric_name         = "CPUUtilization"
-            period              = "300"
-            threshold           = "60"
-        },
-        {
-            alarm_name         =  "${local.stack_name}-metric-alarm-down"
-            comparison_operator = "LessThanOrEqualToThreshold" 
-            evaluation_periods  = "2"
-            metric_name         = "CPUUtilization"
-            period              = "120"
-            threshold           = "5"
-        }
-    ]
+  auto_scaling_policy_up = [
+    {
+      name                = "${local.stack_name}-Worker-Policy-UP"
+      scaling_adjustment  = "1"
+      adjustment_type     = "ChangeInCapacity"
+      cooldown            = "300"
+      policy_type         = "SimpleScaling"
+      alarm_name          = "${local.stack_name}-Worker-Metric-Alarm-UP"
+      comparison_operator = "GreaterThanOrEqualToThreshold"
+      evaluation_periods  = "2"
+      namespace           = "AWS/EC2"
+      metric_name         = "CPUUtilization"
+      period              = "300"
+      statistic           = "Average"
+      threshold           = "60"
+    }
+  ]
 }
 ```
 ## Requirements
@@ -63,8 +51,9 @@ module "lb_bastion_group" {
 ## Variables Inputs
 | Name | Description | Required | Type | Default |
 | ---- | ----------- | -------- | ---- | ------- |
-| asg_name | The name of the auto scaling group | `yes` | `string` | `` |
-
+| asg_name | O nome do Auto Scaling Group. | `yes` | `string` | `` |
+| auto_scaling_policy_up | Definição de uma politica de dimensionamento automaticos. | `no` | `list` | `` |
+| auto_scaling_policy_down | Definição de um politica de redimensionamento automaticos. | `no` | `list` | `` |
 
 ## Variable Outputs
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

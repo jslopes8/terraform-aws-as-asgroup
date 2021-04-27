@@ -45,11 +45,11 @@ variable "target_group_arns" {
     type = any
     default = null
 }
-variable "asg_policy" {
+variable "auto_scaling_policy_down" {
     type = any 
     default = []
 }
-variable "metric_alarm" {
+variable "auto_scaling_policy_up" {
     type = any 
     default = []
 }
