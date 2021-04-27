@@ -133,7 +133,7 @@ resource "aws_autoscaling_policy" "asg_with_tg_up" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "asg_with_tg_up" {
-    count = var.create && var.target_group_arns == null ? length(var.auto_scaling_policy_up) : 0
+    count = var.create && var.target_group_arns != null ? length(var.auto_scaling_policy_up) : 0
 
     alarm_name          = lookup(var.auto_scaling_policy_up[count.index], "alarm_name", null)
     alarm_description   = lookup(var.auto_scaling_policy_up[count.index], "alarm_description", null)
