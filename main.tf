@@ -132,7 +132,7 @@ resource "aws_autoscaling_policy" "asg_with_tg_up" {
     policy_type         = lookup(var.auto_scaling_policy_up[count.index], "policy_type", null)
 }
 
-resource "aws_cloudwatch_metric_alarm" "asg_with_lb_up" {
+resource "aws_cloudwatch_metric_alarm" "asg_with_tg_up" {
     count = var.create && var.target_group_arns == null ? length(var.auto_scaling_policy_up) : 0
 
     alarm_name          = lookup(var.auto_scaling_policy_up[count.index], "alarm_name", null)
@@ -148,7 +148,7 @@ resource "aws_cloudwatch_metric_alarm" "asg_with_lb_up" {
         "AutoScalingGroupName" = aws_autoscaling_group.asg_with_lb.0.name
     }
     actions_enabled     = lookup(var.auto_scaling_policy_up[count.index], "actions_enabled", null)
-    alarm_actions       = [ aws_autoscaling_policy.asg_with_lb_up.0.arn ]
+    alarm_actions       = [ aws_autoscaling_policy.asg_with_tg_up.0.arn ]
 }
 
 resource "aws_autoscaling_policy" "asg_with_tg_down" {
@@ -161,7 +161,7 @@ resource "aws_autoscaling_policy" "asg_with_tg_down" {
     cooldown            = lookup(var.auto_scaling_policy_down[count.index], "cooldown", null)
     policy_type         = lookup(var.auto_scaling_policy_down[count.index], "policy_type", null)
 }
-resource "aws_cloudwatch_metric_alarm" "asg_with_tg" {
+resource "aws_cloudwatch_metric_alarm" "asg_with_tg_down" {
     count = var.create && var.target_group_arns != null ? length(var.metrauto_scaling_policy_down) : 0
 
     alarm_name          = lookup(var.metrauto_scaling_policy_down[count.index], "alarm_name", null)
